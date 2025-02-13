@@ -78,16 +78,26 @@ const Navbar = () => {
 
           {user && (
             <>
-              {/* <NavLink
-                to="/recommendationsForMe"
+              <NavLink
+                to="/myTask"
                 className={({ isActive }) =>
                   `hover:text-primary transition ${
                     isActive ? "text-primary" : "text-gray-700"
                   }`
                 }
               >
-                Recommendations
-              </NavLink> */}
+                My Task
+              </NavLink>
+              <NavLink
+                to="/addTask"
+                className={({ isActive }) =>
+                  `hover:text-primary transition ${
+                    isActive ? "text-primary" : "text-gray-700"
+                  }`
+                }
+              >
+                Add Task
+              </NavLink>
             </>
           )}
         </ul>
@@ -152,13 +162,20 @@ const Navbar = () => {
 
           {user && (
             <>
-              {/* <NavLink
-                to="/recommendationsForMe"
+              <NavLink
+                to="/myTask"
                 onClick={() => setShowMobileMenu(false)}
                 className="btn btn-primary btn-block"
               >
-                Recommendations
-              </NavLink> */}
+                My Task
+              </NavLink>
+              <NavLink
+                to="/addTask"
+                onClick={() => setShowMobileMenu(false)}
+                className="btn btn-primary btn-block"
+              >
+                Add Task
+              </NavLink>
             </>
           )}
           {user ? (
