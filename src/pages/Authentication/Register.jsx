@@ -1,36 +1,55 @@
 import React, { useContext, useEffect } from "react";
-import toast from "react-hot-toast";
-import { Link, useLocation, useNavigate } from "react-router-dom";
-import login from "../../assets/Lottie/login.json";
+import { Link, useNavigate } from "react-router-dom";
+import signup from "../../assets/Lottie/registration.json";
+import Lottie from "lottie-react";
 import { AuthContext } from "../../providers/AuthProvider";
+import toast from "react-hot-toast";
 import Swal from "sweetalert2";
 import AOS from "aos";
 import "aos/dist/aos.css";
-import Lottie from "lottie-react";
 
-const SignIn = () => {
-  const { signIn, signInWithGoogle } = useContext(AuthContext);
+const Register = () => {
   const navigate = useNavigate();
-  const location = useLocation();
-  const from = location?.state || "/";
+  const { signInWithGoogle, createUser, updateUserProfile, setUser } =
+    useContext(AuthContext);
 
-  // Email Password Signin
-  const handleSignIn = async (e) => {
+  // sign up with email
+  const handleSignUp = async (e) => {
     e.preventDefault();
     const form = e.target;
     const email = form.email.value;
+    const name = form.name.value;
+    const photo = form.photo.value;
     const pass = form.password.value;
-    console.log({ email, pass });
+    console.log({ email, pass, name, photo });
+    if (!/[A-Z]/.test(pass) || !/[a-z]/.test(pass) || pass.length < 6) {
+      Swal.fire({
+        title: "Error",
+        text: "Password must be at least 6 characters long and include both uppercase and lowercase letters.",
+        icon: "error",
+        confirmButtonText: "Ok",
+      });
+      return;
+    }
     try {
-      //User Login
-      await signIn(email, pass);
-      toast.success("Signin Successful");
-      navigate(from, { replace: true });
+      const result = await createUser(email, pass);
+      console.log(result);
+      await updateUserProfile(name, photo);
+      setUser({ ...result.user, photoURL: photo, displayName: name });
+      //   toast.success("Signup Successful");
+      Swal.fire({
+        title: "Success!",
+        text: "Account created successfully",
+        icon: "success",
+        confirmButtonText: "Ok",
+      });
+      navigate("/");
     } catch (err) {
       console.log(err);
+      toast.error(err?.message);
       Swal.fire({
-        title: "error!",
-        text: "Login failed . Please try again",
+        title: "Error",
+        text: err.message,
         icon: "error",
         confirmButtonText: "Ok",
       });
@@ -43,44 +62,63 @@ const SignIn = () => {
       await signInWithGoogle();
 
       toast.success("Signin Successful");
-      navigate(from, { replace: true });
+      navigate("/");
     } catch (err) {
       console.log(err);
-      Swal.fire({
-        title: "error!",
-        text: "Login failed . Please try again",
-        icon: "error",
-        confirmButtonText: "Ok",
-      });
+      toast.error(err?.message);
     }
   };
 
   useEffect(() => {
-    document.title = "Task Manager - Login";
+    document.title = "ProRecco - Sign up";
     AOS.init({
-      duration: 1000,
-      easing: "ease-in-out",
-      once: true,
+      duration: 1000, // Animation duration
+      easing: "ease-in-out", // Easing function
+      once: true, // Whether animation happens only once
     });
   }, []);
-
   return (
     <div
       data-aos="fade-right"
-      className="flex justify-center items-center min-h-[calc(100vh-306px)] my-24"
+      className="flex   justify-center items-center min-h-[calc(100vh-306px)] my-12"
     >
-      <div
-        data-aos="fade-right"
-        className="flex w-full max-w-sm mx-auto overflow-hidden bg-white rounded-lg shadow-lg  lg:max-w-4xl "
-      >
+      <div className="flex w-full max-w-sm mx-auto overflow-hidden bg-white rounded-lg shadow-lg  lg:max-w-4xl ">
         <div className="w-full px-6 py-8 md:px-8 lg:w-1/2">
-          <div className="flex justify-center mx-auto"></div>
-
           <p className="mt-3 text-xl text-center text-gray-600 ">
-            Welcome back!
+            Get Your Free Account Now.
           </p>
 
-          <form onSubmit={handleSignIn}>
+          <form onSubmit={handleSignUp}>
+            <div className="mt-4">
+              <label
+                className="block mb-2 text-sm font-medium text-gray-600 "
+                htmlFor="name"
+              >
+                Username
+              </label>
+              <input
+                id="name"
+                autoComplete="name"
+                name="name"
+                className="block w-full px-4 py-2 text-gray-700 bg-white border rounded-lg    focus:border-blue-400 focus:ring-opacity-40  focus:outline-none focus:ring focus:ring-blue-300"
+                type="text"
+              />
+            </div>
+            <div className="mt-4">
+              <label
+                className="block mb-2 text-sm font-medium text-gray-600 "
+                htmlFor="photo"
+              >
+                Photo URL
+              </label>
+              <input
+                id="photo"
+                autoComplete="photo"
+                name="photo"
+                className="block w-full px-4 py-2 text-gray-700 bg-white border rounded-lg    focus:border-blue-400 focus:ring-opacity-40  focus:outline-none focus:ring focus:ring-blue-300"
+                type="text"
+              />
+            </div>
             <div className="mt-4">
               <label
                 className="block mb-2 text-sm font-medium text-gray-600 "
@@ -120,7 +158,7 @@ const SignIn = () => {
                 type="submit"
                 className="w-full px-6 py-3 text-sm font-medium tracking-wide text-white capitalize transition-colors duration-300 transform bg-gray-800 rounded-lg hover:bg-gray-700 focus:outline-none focus:ring focus:ring-gray-300 focus:ring-opacity-50"
               >
-                Sign In
+                Sign Up
               </button>
             </div>
           </form>
@@ -129,7 +167,7 @@ const SignIn = () => {
             <span className="w-1/5 border-b  lg:w-1/4"></span>
 
             <div className="text-xs text-center text-gray-500 uppercase  hover:underline">
-              or login with google
+              or Registration with google
             </div>
 
             <span className="w-1/5 border-b dark:border-gray-400 lg:w-1/4"></span>
@@ -161,32 +199,29 @@ const SignIn = () => {
             </div>
 
             <span className="w-5/6 px-4 py-3 font-bold text-center">
-              Log in with Google
+              Sign up with Google
             </span>
           </div>
 
-          <div className="flex flex-col items-center justify-between mt-4">
-            <h2 className="text-blue-700 font-bold text-lg">
-              Don't have account??
-            </h2>
+          <div className="flex items-center justify-between mt-4">
             <span className="w-1/5 border-b  md:w-1/4"></span>
 
             <Link
-              to="/signup"
-              className="text-base text-gray-700 uppercase  hover:underline hover:text-black text-center"
+              to="/login"
+              className="text-lg text-gray-500 uppercase  hover:underline hover:text-black"
             >
-              Click to <span className="">Sign up</span>
+              or Login
             </Link>
 
             <span className="w-1/5 border-b  md:w-1/4"></span>
           </div>
         </div>
-        <div className="flex-1 text-center lg:text-left w-96">
-          <Lottie animationData={login}></Lottie>
+        <div className="flex-1 text-center lg:text-left w-96 md:mt-20">
+          <Lottie animationData={signup}></Lottie>
         </div>
       </div>
     </div>
   );
 };
 
-export default SignIn;
+export default Register;
