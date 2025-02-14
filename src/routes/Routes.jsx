@@ -8,6 +8,7 @@ import Register from "../pages/Authentication/Register";
 import MyTask from "../pages/MyTask";
 import AddTask from "../pages/AddTask";
 import EditTask from "../pages/EditTask";
+import PrivateRoute from "./PrivateRoute";
 
 const router = createBrowserRouter([
   {
@@ -20,15 +21,27 @@ const router = createBrowserRouter([
       },
       {
         path: "/myTask",
-        element: <MyTask />,
+        element: (
+          <PrivateRoute>
+            <MyTask />
+          </PrivateRoute>
+        ),
       },
       {
         path: "/addTask",
-        element: <AddTask />,
+        element: (
+          <PrivateRoute>
+            <AddTask />
+          </PrivateRoute>
+        ),
       },
       {
         path: "/editTask/:id",
-        element: <EditTask />,
+        element: (
+          <PrivateRoute>
+            <EditTask />
+          </PrivateRoute>
+        ),
       },
 
       {

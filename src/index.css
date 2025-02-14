@@ -1,3 +1,20 @@
+@layer base {
+  :root {
+    --text: rgb(26, 10, 10);
+    --background: rgb(252, 248, 248);
+    --primary: rgb(116, 22, 25);
+    --secondary: rgb(221, 152, 155);
+    --accent: rgb(117, 164, 204);
+  }
+  .dark {
+    --text: rgb(245, 229, 229);
+    --background: rgb(7, 3, 3);
+    --primary: rgb(233, 139, 142);
+    --secondary: rgb(103, 34, 38);
+    --accent: rgb(51, 97, 138);
+  }
+}
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;

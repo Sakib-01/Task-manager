@@ -89,92 +89,98 @@ const MyTask = () => {
   });
 
   return (
-    <div className="container mx-auto mt-10 px-4">
-      <h2 className="text-4xl font-bold text-center mb-8">
-        Your Created Tasks
-      </h2>
-      <div className="flex justify-between items-center mb-6">
-        <input
-          type="text"
-          placeholder="Search tasks..."
-          className="input input-bordered w-full max-w-xs"
-          value={search}
-          onChange={(e) => setSearch(e.target.value)}
-        />
-        <select
-          className="select select-bordered w-full max-w-xs"
-          value={filter}
-          onChange={(e) => setFilter(e.target.value)}
-        >
-          <option value="all">All</option>
-          <option value="pending">Pending</option>
-          <option value="completed">Completed</option>
-        </select>
-      </div>
-      {loading && (
-        <p className="text-center text-gray-500">Loading your Tasks...</p>
-      )}
-      {error && <p className="text-center text-red-500">{error}</p>}
-      {!loading && filteredTasks.length === 0 && (
-        <p className="text-center text-gray-500">
-          No tasks found.{" "}
-          <Link to="/addTask">
-            <button className="btn btn-primary ml-2">Add Task</button>
-          </Link>
-        </p>
-      )}
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-        {filteredTasks.map((task) => (
-          <div
-            key={task._id}
-            data-aos="fade-up"
-            className="bg-white shadow-md rounded-lg p-4"
+    <div className="bg-background min-h-screen py-10">
+      <div className="container mx-auto px-4 p-6 rounded-lg shadow-lg">
+        <h2 className="text-4xl font-bold text-center text-primary mb-8">
+          Your Created Tasks
+        </h2>
+        <div className="flex justify-between items-center mb-6">
+          <input
+            type="text"
+            placeholder="Search tasks..."
+            className="input input-bordered w-full max-w-xs"
+            value={search}
+            onChange={(e) => setSearch(e.target.value)}
+          />
+          <select
+            className="select select-bordered w-full max-w-xs"
+            value={filter}
+            onChange={(e) => setFilter(e.target.value)}
           >
-            <h3 className="text-xl font-semibold">{task.taskName}</h3>
-            <p className="text-sm text-gray-600 mt-1">{task.taskDescribtion}</p>
-            <p className="text-sm text-gray-500 mt-2">
-              <strong>Assigned:</strong> {task.assignDate}
-            </p>
-            <p className="text-sm text-red-600">
-              <strong>Deadline:</strong> {task.submissionDeadline}
-            </p>
-            <p
-              className={`mt-2 text-sm font-semibold ${
-                task.status === "pending" ? "text-yellow-500" : "text-green-600"
-              }`}
+            <option value="all">All</option>
+            <option value="pending">Pending</option>
+            <option value="completed">Completed</option>
+          </select>
+        </div>
+        {loading && (
+          <p className="text-center text-gray-200">Loading your Tasks...</p>
+        )}
+        {error && <p className="text-center text-red-300">{error}</p>}
+        {!loading && filteredTasks.length === 0 && (
+          <p className="text-center text-gray-200">
+            No tasks found.{" "}
+            <Link to="/addTask">
+              <button className="btn btn-primary ml-2">Add Task</button>
+            </Link>
+          </p>
+        )}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+          {filteredTasks.map((task) => (
+            <div
+              key={task._id}
+              data-aos="fade-up"
+              className="bg-white shadow-md rounded-lg p-4"
             >
-              Status: {task.status}
-            </p>
-            <div className="flex justify-between items-center mt-4">
-              <Link
-                to={`/taskDetails/${task._id}`}
-                className="btn btn-primary btn-sm"
+              <h3 className="text-xl font-semibold">{task.taskName}</h3>
+              <p className="text-sm text-gray-600 mt-1">
+                {task.taskDescribtion}
+              </p>
+              <p className="text-sm text-gray-500 mt-2">
+                <strong>Assigned:</strong> {task.assignDate}
+              </p>
+              <p className="text-sm text-red-600">
+                <strong>Deadline:</strong> {task.submissionDeadline}
+              </p>
+              <p
+                className={`mt-2 text-sm font-semibold ${
+                  task.status === "pending"
+                    ? "text-yellow-500"
+                    : "text-green-600"
+                }`}
               >
-                View
-              </Link>
-              <Link
-                to={`/editTask/${task._id}`}
-                className="btn btn-warning btn-sm"
-              >
-                Edit
-              </Link>
-              <button
-                onClick={() => handleDelete(task._id)}
-                className="btn btn-error btn-sm"
-              >
-                Delete
-              </button>
-              {task.status === "pending" && (
-                <button
-                  onClick={() => handleComplete(task._id)}
-                  className="btn btn-success btn-sm"
+                Status: {task.status}
+              </p>
+              <div className="flex justify-between items-center mt-4">
+                <Link
+                  to={`/taskDetails/${task._id}`}
+                  className="btn btn-primary btn-sm"
                 >
-                  Complete
+                  View
+                </Link>
+                <Link
+                  to={`/editTask/${task._id}`}
+                  className="btn btn-warning btn-sm"
+                >
+                  Edit
+                </Link>
+                <button
+                  onClick={() => handleDelete(task._id)}
+                  className="btn btn-error btn-sm"
+                >
+                  Delete
                 </button>
-              )}
+                {task.status === "pending" && (
+                  <button
+                    onClick={() => handleComplete(task._id)}
+                    className="btn btn-success btn-sm"
+                  >
+                    Complete
+                  </button>
+                )}
+              </div>
             </div>
-          </div>
-        ))}
+          ))}
+        </div>
       </div>
     </div>
   );

@@ -63,7 +63,7 @@ const EditTask = () => {
         icon: "success",
         confirmButtonText: "Ok",
       });
-      //   navigate("/myTask");
+      navigate("/myTask");
     } catch (err) {
       console.log(err);
       toast.error(err.message || "Failed to add data");

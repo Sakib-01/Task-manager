@@ -4,11 +4,11 @@ import { Outlet } from "react-router-dom";
 
 const Main = () => {
   return (
-    <div>
+    <div className="bg-background">
       {/* Navbar */}
       <Navbar />
       {/* Outlet */}
-      <div className="min-h-[calc(100vh-306px)] mt-16">
+      <div className="min-h-[calc(100vh-306px)] mt-16 ">
         <Outlet />
       </div>
       {/* Footer */}

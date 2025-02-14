@@ -2,12 +2,16 @@ import React, { useContext, useEffect, useState } from "react";
 import { Link, NavLink, useLocation, useNavigate } from "react-router-dom";
 import { AuthContext } from "../providers/AuthProvider";
 import toast from "react-hot-toast";
+import { BsMoon, BsSun } from "react-icons/bs";
+
 // import menuIcon from "../assets/menu_icon.png";
 import menuIcon from "../assets/img/menu_icon.png";
 import crossIcon from "../assets/img/cross_icon.svg";
 import logo from "../assets/img/logo.jpg";
+import { ThemeContext } from "../providers/ThemeProvider";
 
 const Navbar = () => {
+  const { isDarkMode, toggleTheme } = useContext(ThemeContext);
   const [showMobileMenu, setShowMobileMenu] = useState(false);
   const { user, logOut } = useContext(AuthContext);
   const navigate = useNavigate();
@@ -131,6 +135,19 @@ const Navbar = () => {
               </Link>
             </div>
           )}
+
+          {/* Dark/Light Mode Toggle */}
+          <button
+            onClick={toggleTheme}
+            className="focus:outline-none text-lg p-2 rounded-full bg-primary"
+          >
+            {isDarkMode ? (
+              <BsSun className="text-yellow-300" />
+            ) : (
+              <BsMoon className="text-white" />
+            )}
+          </button>
+
           <button
             onClick={() => setShowMobileMenu(true)}
             className="lg:hidden text-primary"

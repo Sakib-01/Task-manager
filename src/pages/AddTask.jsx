@@ -7,6 +7,7 @@ import { useNavigate } from "react-router-dom";
 
 const AddTask = () => {
   const { user } = useContext(AuthContext);
+  const navigate = useNavigate();
   const handleSubmit = async (e) => {
     e.preventDefault();
     const form = e.target;
@@ -38,7 +39,7 @@ const AddTask = () => {
         icon: "success",
         confirmButtonText: "Ok",
       });
-      //   navigate("/myTask");
+      navigate("/myTask");
     } catch (err) {
       console.log(err);
       toast.error(err.message || "Failed to add data");
