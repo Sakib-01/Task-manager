@@ -7,6 +7,7 @@ import SignIn from "../pages/Authentication/SignIn";
 import Register from "../pages/Authentication/Register";
 import MyTask from "../pages/MyTask";
 import AddTask from "../pages/AddTask";
+import EditTask from "../pages/EditTask";
 
 const router = createBrowserRouter([
   {
@@ -24,6 +25,10 @@ const router = createBrowserRouter([
       {
         path: "/addTask",
         element: <AddTask />,
+      },
+      {
+        path: "/editTask/:id",
+        element: <EditTask />,
       },
 
       {

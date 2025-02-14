@@ -153,7 +153,7 @@ const MyTask = () => {
                 View
               </Link>
               <Link
-                to={`/updateTask/${task._id}`}
+                to={`/editTask/${task._id}`}
                 className="btn btn-warning btn-sm"
               >
                 Edit
