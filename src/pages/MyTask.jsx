@@ -31,7 +31,10 @@ const MyTask = () => {
       setLoading(true);
       const { data } = await axiosSecure.get(`/my-task/${user?.email}`);
       setTasks(
-        data.sort((a, b) => new Date(b.assignDate) - new Date(a.assignDate))
+        data.sort(
+          (a, b) =>
+            new Date(a.submissionDeadline) - new Date(b.submissionDeadline)
+        )
       );
     } catch (err) {
       console.error(err);
