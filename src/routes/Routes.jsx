@@ -9,6 +9,7 @@ import MyTask from "../pages/MyTask";
 import AddTask from "../pages/AddTask";
 import EditTask from "../pages/EditTask";
 import PrivateRoute from "./PrivateRoute";
+import ViewTask from "../pages/ViewTask";
 
 const router = createBrowserRouter([
   {
@@ -32,6 +33,14 @@ const router = createBrowserRouter([
         element: (
           <PrivateRoute>
             <AddTask />
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: "/taskDetails/:id",
+        element: (
+          <PrivateRoute>
+            <ViewTask />
           </PrivateRoute>
         ),
       },
