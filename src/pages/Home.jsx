@@ -16,9 +16,9 @@ const Home = () => {
           <h2 className="md:text-5xl sm:text-2xl font-semibold">
             Welcome to Task Manager!
           </h2>
-          <p className="text-gray-600 mt-2">
+          <p className="text-primary mt-2 font-bold">
             Please{" "}
-            <Link to="/login" className="text-primary underline">
+            <Link to="/login" className="text-blue-600 underline">
               login
             </Link>{" "}
             to add a task.

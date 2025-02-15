@@ -7,7 +7,7 @@ import { BsMoon, BsSun } from "react-icons/bs";
 // import menuIcon from "../assets/menu_icon.png";
 import menuIcon from "../assets/img/menu_icon.png";
 import crossIcon from "../assets/img/cross_icon.svg";
-import logo from "../assets/img/logo.jpg";
+import logo from "../assets/img/logo.webp";
 import { ThemeContext } from "../providers/ThemeProvider";
 
 const Navbar = () => {
@@ -37,27 +37,8 @@ const Navbar = () => {
     }
   };
 
-  //   const scrollToSection = (id) => {
-  //     const section = document.getElementById(id);
-  //     if (section) {
-  //       section.scrollIntoView({ behavior: "smooth" });
-  //     }
-  //   };
-
-  //   const handleLinkClick = (e, target) => {
-  //     e.preventDefault();
-  //     if (location.pathname === "/") {
-  //       // If already on the homepage, scroll to the target section
-  //       scrollToSection(target);
-  //     } else {
-  //       // Navigate to the homepage and scroll to the target section
-  //       navigate("/", { replace: true });
-  //       setTimeout(() => scrollToSection(target), 100);
-  //     }
-  //   };
-
   return (
-    <nav className="bg-white shadow-md fixed top-0 left-0 w-full z-50">
+    <nav className="bg-background shadow-md fixed top-0 left-0 w-full z-50">
       <div className="w-11/12 mx-auto px-4 py-4 flex justify-between items-center">
         {/* Logo Section */}
         <div className="flex items-center gap-4">
@@ -73,7 +54,7 @@ const Navbar = () => {
             to="/"
             className={({ isActive }) =>
               `hover:text-primary transition ${
-                isActive ? "text-primary" : "text-gray-700"
+                isActive ? "text-primary" : "text-blue-700"
               }`
             }
           >
@@ -86,7 +67,7 @@ const Navbar = () => {
                 to="/myTask"
                 className={({ isActive }) =>
                   `hover:text-primary transition ${
-                    isActive ? "text-primary" : "text-gray-700"
+                    isActive ? "text-primary" : "text-blue-700"
                   }`
                 }
               >
@@ -96,7 +77,7 @@ const Navbar = () => {
                 to="/addTask"
                 className={({ isActive }) =>
                   `hover:text-primary transition ${
-                    isActive ? "text-primary" : "text-gray-700"
+                    isActive ? "text-primary" : "text-blue-700"
                   }`
                 }
               >
@@ -120,17 +101,23 @@ const Navbar = () => {
               </div>
               <button
                 onClick={handleLogout}
-                className="btn btn-primary btn-sm text-white"
+                className="btn bg-primary btn-sm text-white hover:text-black"
               >
                 Logout
               </button>
             </div>
           ) : (
             <div className="hidden md:flex gap-4">
-              <Link to="/login" className="btn btn-outline btn-primary btn-sm">
+              <Link
+                to="/login"
+                className="btn btn-outline  btn-sm border-primary text-primary"
+              >
                 Login
               </Link>
-              <Link to="/signup" className="btn btn-primary btn-sm text-white">
+              <Link
+                to="/signup"
+                className="btn bg-primary btn-sm text-white hover:text-black"
+              >
                 Sign Up
               </Link>
             </div>
@@ -152,7 +139,11 @@ const Navbar = () => {
             onClick={() => setShowMobileMenu(true)}
             className="lg:hidden text-primary"
           >
-            <img src={menuIcon} alt="Menu Icon" className="w-8" />
+            <img
+              src={menuIcon}
+              alt="Menu Icon"
+              className="w-8 bg-slate-100 rounded-md"
+            />
           </button>
         </div>
       </div>
@@ -172,7 +163,7 @@ const Navbar = () => {
           <NavLink
             to="/"
             onClick={() => setShowMobileMenu(false)}
-            className="btn btn-primary btn-block"
+            className="btn bg-secondary btn-block text-text hover:text-black"
           >
             Home
           </NavLink>
@@ -182,14 +173,14 @@ const Navbar = () => {
               <NavLink
                 to="/myTask"
                 onClick={() => setShowMobileMenu(false)}
-                className="btn btn-primary btn-block"
+                className="btn bg-secondary btn-block text-text hover:text-black"
               >
                 My Task
               </NavLink>
               <NavLink
                 to="/addTask"
                 onClick={() => setShowMobileMenu(false)}
-                className="btn btn-primary btn-block"
+                className="btn bg-secondary btn-block text-text hover:text-black"
               >
                 Add Task
               </NavLink>
@@ -201,7 +192,7 @@ const Navbar = () => {
                 handleLogout();
                 setShowMobileMenu(false);
               }}
-              className="btn btn-error btn-block"
+              className="btn bg-secondary btn-block text-text hover:text-black"
             >
               Logout
             </button>
@@ -209,7 +200,7 @@ const Navbar = () => {
             <Link
               to="/login"
               onClick={() => setShowMobileMenu(false)}
-              className="btn btn-primary btn-block"
+              className="btn bg-primary btn-block text-text hover:text-black"
             >
               Login
             </Link>

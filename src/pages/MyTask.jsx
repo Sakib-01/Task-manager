@@ -113,11 +113,11 @@ const MyTask = () => {
           </select>
         </div>
         {loading && (
-          <p className="text-center text-gray-200">Loading your Tasks...</p>
+          <p className="text-center text-primary">Loading your Tasks...</p>
         )}
         {error && <p className="text-center text-red-300">{error}</p>}
         {!loading && filteredTasks.length === 0 && (
-          <p className="text-center text-gray-200">
+          <p className="text-center text-primary">
             No tasks found.{" "}
             <Link to="/addTask">
               <button className="btn btn-primary ml-2">Add Task</button>
