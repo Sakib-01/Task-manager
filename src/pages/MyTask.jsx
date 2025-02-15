@@ -89,8 +89,8 @@ const MyTask = () => {
   });
 
   return (
-    <div className="bg-background min-h-screen py-10">
-      <div className="container mx-auto px-4 p-6 rounded-lg shadow-lg">
+    <div className="bg-background min-h-screen ">
+      <div className="container mx-auto px-4 p-6 rounded-lg shadow-lg py-10">
         <h2 className="text-4xl font-bold text-center text-primary mb-8">
           Your Created Tasks
         </h2>

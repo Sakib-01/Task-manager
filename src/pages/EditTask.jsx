@@ -70,52 +70,53 @@ const EditTask = () => {
     }
   };
   return (
-    <div
-      data-aos="zoom-in"
-      className="max-w-xl mx-auto mt-10 bg-white shadow-md rounded-lg p-6 lg:pt-10"
-    >
-      <h2 className="text-2xl font-bold text-gray-800 mb-4">Edit Task</h2>
-      <form onSubmit={handleSubmit}>
-        {/* Task Name */}
-        <div className="mb-4">
-          <label
-            className="block mb-2 text-sm font-medium text-gray-700"
-            htmlFor="taskName"
-          >
-            Task Name
-          </label>
-          <input
-            id="taskName"
-            name="taskName"
-            placeholder="Enter Task Name"
-            defaultValue={tasks?.taskName}
-            className="block w-full px-4 py-2 text-gray-700 bg-gray-50 border border-gray-300 rounded-lg focus:border-blue-500 focus:ring focus:ring-blue-200 focus:outline-none"
-            type="text"
-            required
-          />
-        </div>
+    <div className="border-t-2">
+      <div
+        data-aos="zoom-in"
+        className="max-w-xl mx-auto mt-20  bg-white shadow-md rounded-lg p-6 lg:pt-10"
+      >
+        <h2 className="text-2xl font-bold text-gray-800 mb-4">Edit Task</h2>
+        <form onSubmit={handleSubmit}>
+          {/* Task Name */}
+          <div className="mb-4">
+            <label
+              className="block mb-2 text-sm font-medium text-gray-700"
+              htmlFor="taskName"
+            >
+              Task Name
+            </label>
+            <input
+              id="taskName"
+              name="taskName"
+              placeholder="Enter Task Name"
+              defaultValue={tasks?.taskName}
+              className="block w-full px-4 py-2 text-gray-700 bg-gray-50 border border-gray-300 rounded-lg focus:border-blue-500 focus:ring focus:ring-blue-200 focus:outline-none"
+              type="text"
+              required
+            />
+          </div>
 
-        {/* Task Describtion */}
-        <div className="mb-4">
-          <label
-            className="block mb-2 text-sm font-medium text-gray-700"
-            htmlFor="taskDescribtion"
-          >
-            Task Describtion
-          </label>
-          <textarea
-            id="taskDescribtion"
-            name="taskDescribtion"
-            placeholder="Provide details about the Task"
-            defaultValue={tasks?.taskDescribtion}
-            className="block w-full px-4 py-2 text-gray-700 bg-gray-50 border border-gray-300 rounded-lg focus:border-blue-500 focus:ring focus:ring-blue-200 focus:outline-none"
-            rows="4"
-            required
-          ></textarea>
-        </div>
+          {/* Task Describtion */}
+          <div className="mb-4">
+            <label
+              className="block mb-2 text-sm font-medium text-gray-700"
+              htmlFor="taskDescribtion"
+            >
+              Task Describtion
+            </label>
+            <textarea
+              id="taskDescribtion"
+              name="taskDescribtion"
+              placeholder="Provide details about the Task"
+              defaultValue={tasks?.taskDescribtion}
+              className="block w-full px-4 py-2 text-gray-700 bg-gray-50 border border-gray-300 rounded-lg focus:border-blue-500 focus:ring focus:ring-blue-200 focus:outline-none"
+              rows="4"
+              required
+            ></textarea>
+          </div>
 
-        {/* Product Image URL */}
-        {/* <div className="mb-4">
+          {/* Product Image URL */}
+          {/* <div className="mb-4">
           <label
             className="block mb-2 text-sm font-medium text-gray-700"
             htmlFor="productImageUrl"
@@ -132,53 +133,54 @@ const EditTask = () => {
           />
         </div> */}
 
-        {/* Assign Date */}
-        <div className="flex justify-center items-center gap-5">
-          <div className="mb-4">
-            <label
-              className="block mb-2 text-sm font-medium text-gray-700"
-              htmlFor="assignDate"
-            >
-              Assign Date
-            </label>
-            <input
-              id="assignDate"
-              name="assignDate"
-              defaultValue={tasks?.assignDate}
-              className="block w-full px-4 py-2 text-gray-700 bg-gray-50 border border-gray-300 rounded-lg focus:border-blue-500 focus:ring focus:ring-blue-200 focus:outline-none"
-              type="date"
-              required
-            />
+          {/* Assign Date */}
+          <div className="flex flex-col sm:flex-row justify-center items-center gap-5 w-full">
+            <div className="w-full sm:w-auto mb-4">
+              <label
+                className="block mb-2 text-sm font-medium text-gray-700"
+                htmlFor="assignDate"
+              >
+                Assign Date
+              </label>
+              <input
+                id="assignDate"
+                name="assignDate"
+                defaultValue={tasks?.assignDate}
+                className="block w-full sm:w-60 px-4 py-2 text-gray-700 bg-gray-50 border border-gray-300 rounded-lg focus:border-blue-500 focus:ring focus:ring-blue-200 focus:outline-none"
+                type="date"
+                required
+              />
+            </div>
+
+            <div className="w-full sm:w-auto mb-4">
+              <label
+                className="block mb-2 text-sm font-medium text-gray-700"
+                htmlFor="submissionDeadline"
+              >
+                Submission Deadline
+              </label>
+              <input
+                id="submissionDeadline"
+                name="submissionDeadline"
+                defaultValue={tasks?.submissionDeadline}
+                className="block w-full sm:w-60 px-4 py-2 text-gray-700 bg-gray-50 border border-gray-300 rounded-lg focus:border-blue-500 focus:ring focus:ring-blue-200 focus:outline-none"
+                type="date"
+                required
+              />
+            </div>
           </div>
 
-          <div className="mb-4">
-            <label
-              className="block mb-2 text-sm font-medium text-gray-700 w-full"
-              htmlFor="submissionDeadline"
+          {/* Edit Task Button */}
+          <div className="mt-6">
+            <button
+              type="submit"
+              className="w-full px-6 py-3 text-sm font-medium tracking-wide text-white capitalize bg-blue-500 rounded-lg hover:bg-blue-600 focus:outline-none focus:ring focus:ring-blue-300 focus:ring-opacity-50"
             >
-              Submission Deadline
-            </label>
-            <input
-              id="submissionDeadline"
-              name="submissionDeadline"
-              defaultValue={tasks?.submissionDeadline}
-              className="block w-full px-4 py-2 text-gray-700 bg-gray-50 border border-gray-300 rounded-lg focus:border-blue-500 focus:ring focus:ring-blue-200 focus:outline-none"
-              type="date"
-              required
-            />
+              Edit Task
+            </button>
           </div>
-        </div>
-
-        {/* Edit Task Button */}
-        <div className="mt-6">
-          <button
-            type="submit"
-            className="w-full px-6 py-3 text-sm font-medium tracking-wide text-white capitalize bg-blue-500 rounded-lg hover:bg-blue-600 focus:outline-none focus:ring focus:ring-blue-300 focus:ring-opacity-50"
-          >
-            Edit Task
-          </button>
-        </div>
-      </form>
+        </form>
+      </div>
     </div>
   );
 };
