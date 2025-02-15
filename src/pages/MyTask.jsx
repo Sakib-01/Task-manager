@@ -133,8 +133,11 @@ const MyTask = () => {
             >
               <h3 className="text-xl font-semibold">{task.taskName}</h3>
               <p className="text-sm text-gray-600 mt-1">
-                {task.taskDescribtion}
+                {task.taskDescribtion.length > 20
+                  ? `${task.taskDescribtion.slice(0, 20)}...`
+                  : task.taskDescribtion}
               </p>
+
               <p className="text-sm text-gray-500 mt-2">
                 <strong>Assigned:</strong> {task.assignDate}
               </p>

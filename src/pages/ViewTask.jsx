@@ -33,7 +33,9 @@ const ViewTask = () => {
   }
 
   if (!task) {
-    return <p className="text-center text-gray-500">Loading task details...</p>;
+    return (
+      <p className="text-center text-primary pt-20 ">Loading task details...</p>
+    );
   }
 
   return (
