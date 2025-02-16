@@ -4,6 +4,7 @@ import signup from "../../assets/Lottie/registration.json";
 import Lottie from "lottie-react";
 import { AuthContext } from "../../providers/AuthProvider";
 import toast from "react-hot-toast";
+import { TbFidgetSpinner } from "react-icons/tb";
 import Swal from "sweetalert2";
 import AOS from "aos";
 import "aos/dist/aos.css";
@@ -11,7 +12,7 @@ import { imageUpload } from "../../api/utils";
 
 const Register = () => {
   const navigate = useNavigate();
-  const { signInWithGoogle, createUser, updateUserProfile, setUser } =
+  const { signInWithGoogle, createUser, updateUserProfile, setUser, loading } =
     useContext(AuthContext);
 
   // sign up with email
@@ -182,7 +183,11 @@ const Register = () => {
                 type="submit"
                 className="w-full px-6 py-3 text-sm font-medium tracking-wide text-white capitalize transition-colors duration-300 transform bg-gray-800 rounded-lg hover:bg-gray-700 focus:outline-none focus:ring focus:ring-gray-300 focus:ring-opacity-50"
               >
-                Sign Up
+                {loading ? (
+                  <TbFidgetSpinner className="animate-spin m-auto text-white" />
+                ) : (
+                  "Sign Up"
+                )}
               </button>
             </div>
           </form>
