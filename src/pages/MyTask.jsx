@@ -13,6 +13,7 @@ const MyTask = () => {
   const [error, setError] = useState(null);
   const [filter, setFilter] = useState("all");
   const [search, setSearch] = useState("");
+  const [sortByDeadline, setSortByDeadline] = useState(false);
   const axiosSecure = useAxiosSecure();
 
   useEffect(() => {
@@ -30,12 +31,7 @@ const MyTask = () => {
     try {
       setLoading(true);
       const { data } = await axiosSecure.get(`/my-task/${user?.email}`);
-      setTasks(
-        data.sort(
-          (a, b) =>
-            new Date(a.submissionDeadline) - new Date(b.submissionDeadline)
-        )
-      );
+      setTasks(data);
     } catch (err) {
       console.error(err);
       setError("Failed to fetch tasks. Please try again later.");
@@ -80,7 +76,18 @@ const MyTask = () => {
     }
   };
 
-  const filteredTasks = tasks.filter((task) => {
+  const handleSort = () => {
+    setSortByDeadline(!sortByDeadline);
+  };
+
+  const sortedTasks = sortByDeadline
+    ? [...tasks].sort(
+        (a, b) =>
+          new Date(a.submissionDeadline) - new Date(b.submissionDeadline)
+      )
+    : tasks;
+
+  const filteredTasks = sortedTasks.filter((task) => {
     return (
       (filter === "all" || task.status === filter) &&
       (task.taskName.toLowerCase().includes(search.toLowerCase()) ||
@@ -94,7 +101,7 @@ const MyTask = () => {
         <h2 className="text-4xl font-bold text-center text-primary mb-8">
           Your Created Tasks
         </h2>
-        <div className="flex justify-between items-center mb-6">
+        <div className="flex justify-between items-center mb-6 gap-2">
           <input
             type="text"
             placeholder="Search tasks..."
@@ -102,6 +109,11 @@ const MyTask = () => {
             value={search}
             onChange={(e) => setSearch(e.target.value)}
           />
+
+          <button onClick={handleSort} className="btn bg-secondary  text-text">
+            {sortByDeadline ? "Sort by Default" : "Sort by Deadline"}
+          </button>
+
           <select
             className="select select-bordered w-full max-w-xs"
             value={filter}

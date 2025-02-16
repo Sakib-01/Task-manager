@@ -142,13 +142,13 @@ const AddTask = () => {
             </div>
           </div>
 
-          {/* Add Query Button */}
+          {/* Add task Button */}
           <div className="mt-6">
             <button
               type="submit"
               className="w-full px-6 py-3 text-sm font-medium tracking-wide text-white capitalize bg-primary rounded-lg hover:bg-secondary hover:text-black focus:outline-none focus:ring focus:ring-blue-300 focus:ring-opacity-50"
             >
-              Add Query
+              Add Task
             </button>
           </div>
         </form>
